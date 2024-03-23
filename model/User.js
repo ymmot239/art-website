@@ -1,5 +1,7 @@
 // user.js
 const Mongoose = require("mongoose")
+const Youtube = require("./Youtube")
+
 const UserSchema = new Mongoose.Schema({
   username: {
     type: String,
@@ -15,6 +17,14 @@ const UserSchema = new Mongoose.Schema({
     type: String,
     default: "Basic",
     required: true,
+  },
+  code:{
+    type: String,
+  },  
+
+  youtube:{
+    type: Mongoose.Schema.Types.ObjectId,
+    ref: Youtube
   }
 })
 

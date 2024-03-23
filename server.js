@@ -39,6 +39,7 @@ app.get("/register", (req, res) => res.render("register"))
 app.get("/login", (req, res) => res.render("login"))
 app.get("/admin", adminAuth, (req, res) => res.render("admin"))
 app.get("/basic", userAuth, (req, res) => res.render("user"))
+app.get("/spotify", userAuth, (req, res) => res.render("spotify"))
 
 app.get("/logout", (req, res) => {
   res.cookie("jwt", "", { maxAge: "1" })
@@ -46,5 +47,18 @@ app.get("/logout", (req, res) => {
 })
 
 app.use("/api/auth", require("./Auth/route"))
+
+var cors = require('cors');
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://accounts.spotify.com/*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
+
+  next();
+})
+
+app.use("/api/token", require("./Auth/token"))
 
 app.use(express.static(__dirname + '/public'));

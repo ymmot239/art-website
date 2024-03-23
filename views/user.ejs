@@ -9,7 +9,22 @@
 
 <link rel="stylesheet" href="styles.css">
 <style>
+.button {
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
 
+#soundcloud_button{
+  background-color: #ff7700;
+}
+
+#youtube_button{
+  background-color: #ff0000;
+}
 </style>
 
 </head>
@@ -28,19 +43,20 @@
   <div class="side">
     <table>
       <tr><th>
-        <h3>Spotify Connection</h3>
+        <h3>Soundcloud Connection</h3>
         <hr>
-        
+        <button class="button" id="soundcloud_button">connect</button>
       </th></tr>
       <tr><th>
         <h3>Youtube Connection</h3>
         <hr>
+        <button class="button" id="youtube_button">connect</button>
       </th></tr>
     </table>
   </div>
   <div class="main">
     <h2 style="text-align:center;">User information</h2>
-
+    <h3 id="name">User Name: </h3>
   </div>
 </div>
 <div class="footer">
@@ -48,13 +64,41 @@
 </div>
     <script>
 
-      const h1 = document.querySelector("h1");
+      const h1 = document.getElementById("name");
       const getUsers = async () => {
         const res = await fetch("/api/auth/getSelf")
         const data = await res.json()
         h1.innerHTML += `${data.username}`
       }
       getUsers()
+      /*
+      const element = document.getElementById("spotify_button");
+      element.addEventListener("click", spotify_links);
+
+      async function spotify_links() {
+        const code = Math.random().toString(36).substring(2,15);
+        const res = await fetch('/api/token/spotify_api', {
+          method: 'POST',
+          redirect: 'follow',
+          body: JSON.stringify({ state: code }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        const data = await res.json()
+        console.log(data.spotify_url)
+        const res2 = window.location.assign(data.spotify_url);//,{mode: 'no-cors',credentials:"omit",redirect:"follow", referrerPolicy:"origin-when-cross-origin"});
+        console.log(await res2)
+      }
+      */
+
+      const element = document.getElementById("youtube_button");
+      element.addEventListener("click", youtube_links);
+
+      async function youtube_links() {
+        const res = await fetch('/api/token/youtube_api');
+        const data = await res.json()
+        const res2 = window.location.assign(data.youtube_url);
+        console.log(res2)
+      }
       
     </script>
     
