@@ -1,5 +1,5 @@
-const client_id = "22e135ddc2cc4e22805a9260358e9d3e";
-client_secret = "eaa8ad74f1b644329843edd596c5559d";
+const client_id = "";
+client_secret = "";
 var redirect_uri = 'http://localhost:5000/api/token/spotify_callback';
 const querystring = require('node:querystring'); 
 const jwt = require('jsonwebtoken')

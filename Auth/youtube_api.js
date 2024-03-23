@@ -5,9 +5,10 @@ const jwtSecret = "1b127d621c1934040762e00af1e61bbdbd86a65d9405b99c1d766bd3f080a
 const User = require("../model/User");
 const Youtube = require("../model/Youtube");
 
+
 const oauth2Client = new google.auth.OAuth2(
-    "722283765057-01ail1rm6nt5mhs4lsmr15umbpghvdbg.apps.googleusercontent.com",
-    "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 ",
+    "",
+    "",
     "http://localhost:5000/api/token/youtube_callback"
   );
 
